@@ -2,10 +2,10 @@
 
     https://docs.docker.com/docker-for-mac/install/
 
-# ***** Run the following commands in the /docker directory *****
+# ***** Run the following commands in the rm-docker-dev directory *****
 # First Time Setup
 
-Copy the IAC groundzero.sql into docker/postgres/iac_groundzero.sql
+Copy the IAC groundzero.sql into rm-docker-dev/postgres/iac_groundzero.sql
 
 Then run:
   
