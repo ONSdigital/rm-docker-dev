@@ -17,6 +17,10 @@ This script installs docker-compose, then builds an instance of redis, rabbitmq 
 
     ./initialize.sh
 
+# To remove all containers first and then rebuild run 
+
+    ./initialize.sh -r
+
 # Ground Zero
 
     ./groundzero.sh [SERVICE]

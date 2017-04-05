@@ -1,4 +1,10 @@
-REVOKE ALL PRIVILEGES ON DATABASE postgres FROM actionsvc;
+DO $$
+BEGIN
+IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname='actionsvc') THEN
+   REVOKE ALL PRIVILEGES ON DATABASE postgres FROM actionsvc;
+END IF;
+END$$;
+
 DROP SCHEMA IF EXISTS action CASCADE;
 DROP ROLE IF EXISTS actionsvc;
 
