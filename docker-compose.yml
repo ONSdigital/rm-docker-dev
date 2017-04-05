@@ -1,0 +1,12 @@
+version: '2'
+services:
+ ons-postgres:
+  build: ./postgres
+  ports:
+   - "5432:5432"
+  volumes:
+     - .:/code
+ redis:
+  image: redis
+ rabbitmq:
+  image: rabbitmq:3
