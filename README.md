@@ -41,6 +41,21 @@ Alternativley you can run the groundzero.sql scripts in pgAdmin.
 
 This script removes all docker containers created by the above two scripts.
 
+# To start a specific container
+
+RabbitMQ
+
+    docker run -d --hostname rabbit --name rmdockerdev_rabbitmq_1 -p 4369:4369 -p 25672:25672 -p 5671-5672:5671-5672 -p 15671-15672:15671-15672 rabbitmq:3.6-management
+
+Postgres
+
+    docker run --name rmdockerdev_ons-postgres_1  -d -p 5432:5432 ons_postgres
+    docker start postgres-dev
+
+redis
+    
+    docker run --name rmdockerdev_redis_1  -d redis
+
 # ***** General Docker Commands *****
 
 # View running containers
