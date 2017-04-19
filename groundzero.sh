@@ -13,6 +13,8 @@ elif [ "$1" = "actionexp" ]; then
   docker exec rmdockerdev_ons-postgres_1 psql -U postgres -f /docker-entrypoint-initdb.d/actionexp_groundzero.sql
 elif [ "$1" = "iac" ]; then
   docker exec rmdockerdev_ons-postgres_1 psql -U postgres -f /docker-entrypoint-initdb.d/iac_groundzero.sql
+elif [ "$1" = "sample" ]; then
+  docker exec rmdockerdev_ons-postgres_1 psql -U postgres -f /docker-entrypoint-initdb.d/sample_groundzero.sql
 else
   echo "Invalid argument."
 fi

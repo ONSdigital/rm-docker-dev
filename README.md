@@ -31,6 +31,7 @@ Where service can be:
     - action
     - actionexp
     - iac
+    - sample
 or blank to delete and remake the whole database.
 
 Alternativley you can run the groundzero.sql scripts in pgAdmin.
