@@ -9,17 +9,13 @@ Copy the IAC groundzero.sql into rm-docker-dev/postgres/iac_groundzero.sql
 
 Then run:
   
-    ./initialize.sh  -f
+    ./initialize.sh 
 
-This script installs docker-compose, then builds an instance of redis, rabbitmq and postgres as well as running the postgres groundzero scripts to initialize.
+This script installs docker-compose, then builds an instance of redis, rabbitmq, create an sftp server and postgres as well as running the postgres groundzero scripts to initialize.
 
 # To rebuild all containers run 
 
-    ./initialize.sh
-
-# To remove all containers first and then rebuild run 
-
-    ./initialize.sh -r
+    docker-compose stop && docker-compose rm && docker-compose up -d
 
 # Ground Zero
 
@@ -36,13 +32,17 @@ or blank to delete and remake the whole database.
 
 Alternativley you can run the groundzero.sql scripts in pgAdmin.
 
-# Delete All Containers 
+# Delete ALL Containers 
 
-    ./rm_containers.sh
+   docker-compose stop 
+   dokcer-compose rm
 
-This script removes all docker containers created by the above two scripts.
+# Delete Specific Container
 
-# To start a specific container
+    docker stop <CONTAINER_NAME>
+    docker rm <CONTAINER_NAME>
+
+# To create a specific container
 
 RabbitMQ
 
@@ -51,13 +51,11 @@ RabbitMQ
 Postgres
 
     docker run --name rmdockerdev_ons-postgres_1  -d -p 5432:5432 ons_postgres
-    docker start postgres-dev
+    docker start rmdockerdev_ons-postgres_1
 
 redis
     
     docker run --name rmdockerdev_redis_1  -d redis
-
-# ***** General Docker Commands *****
 
 # View running containers
 
@@ -67,7 +65,26 @@ redis
 
     docker ps -a
 
-# Delete Container
+# Access containers
 
-    docker stop <CONTAINER_NAME>
-    docker rm <CONTAINER_NAME>
+    docker exec -it [CONTAINER_NAME] [COMMAND]
+
+Examples
+To access the redis-cli:
+
+    docker exec -it rmdockerdev_redis_1 redis-cli
+
+To access postgres
+
+    docker exec -it rmdockerdev_ons-postgres_1 postgres -U postgres -d postgres
+
+To access the containers
+
+    docker exec -it rmdockerdev_ons-postgres_1 bash
+
+To run a single command
+
+    docker exec rmdockerdev_redis_1 redis-cli del MetaData
+
+will delete the redis MetaDataStore 
+

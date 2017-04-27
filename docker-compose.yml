@@ -17,3 +17,10 @@ services:
     - "25672:25672"
     - "5671-5672:5671-5672"
     - "15671-15672:15671-15672"
+ sftp:
+    image: atmoz/sftp
+    volumes:
+        - ~/Documents/sftp:/home/centos/Documents/sftp
+    ports:
+        - "22:22"
+    command: centos:JLibV2&XD,:1001
