@@ -15,5 +15,5 @@ RUN chmod 755 /docker-entrypoint-initdb.d/actionexp_groundzero.sql
 ADD sample_groundzero.sql /docker-entrypoint-initdb.d/sample_groundzero.sql
 RUN chmod 755 /docker-entrypoint-initdb.d/sample_groundzero.sql
 
-#ADD iac_groundzero.sql /docker-entrypoint-initdb.d/iac_groundzero.sql
-#RUN chmod 755 /docker-entrypoint-initdb.d/iac_groundzero.sql
+ADD iac_groundzero.sql /docker-entrypoint-initdb.d/iac_groundzero.sql
+RUN chmod 755 /docker-entrypoint-initdb.d/iac_groundzero.sql
