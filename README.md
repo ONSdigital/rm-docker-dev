@@ -34,8 +34,7 @@ Alternativley you can run the groundzero.sql scripts in pgAdmin.
 
 # Delete ALL Containers 
 
-   docker-compose stop 
-   dokcer-compose rm
+    docker-compose stop && docker-compose rm
 
 # Delete Specific Container
 
