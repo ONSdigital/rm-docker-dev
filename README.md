@@ -5,15 +5,13 @@
 # ***** Run the following commands in the rm-docker-dev directory *****
 # First Time Setup
 
-Copy the IAC groundzero.sql into rm-docker-dev/postgres/iac_groundzero.sql
+Run:
 
-Then run:
-  
-    ./initialize.sh 
+    ./initialize.sh
 
 This script installs docker-compose, then builds an instance of redis, rabbitmq, create an sftp server and postgres as well as running the postgres groundzero scripts to initialize.
 
-# To rebuild all containers run 
+# To rebuild all containers run
 
     docker-compose stop && docker-compose rm && docker-compose up -d
 
@@ -32,7 +30,7 @@ or blank to delete and remake the whole database.
 
 Alternativley you can run the groundzero.sql scripts in pgAdmin.
 
-# Delete ALL Containers 
+# Delete ALL Containers
 
     docker-compose stop && docker-compose rm
 
@@ -53,7 +51,7 @@ Postgres
     docker start rmdockerdev_ons-postgres_1
 
 redis
-    
+
     docker run --name rmdockerdev_redis_1  -d redis
 
 # View running containers
@@ -85,5 +83,4 @@ To run a single command
 
     docker exec rmdockerdev_redis_1 redis-cli del MetaData
 
-will delete the redis MetaDataStore 
-
+will delete the redis MetaDataStore
