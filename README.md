@@ -2,20 +2,22 @@
 
     https://docs.docker.com/docker-for-mac/install/
 
-# ***** Run the following commands in the rm-docker-dev directory *****
-# First Time Setup
 
-Run:
+# login to docker
 
-    ./initialize.sh
+    docker login
 
-This script installs docker-compose, then builds an instance of redis, rabbitmq, create an sftp server and postgres as well as running the postgres groundzero scripts to initialize.
+# YOU ONLY NEED THE TWO docker-compose-...yml FILES
+
+# in the directory with the docker-compose files run
+
+    docker-compose -f docker-compose-dev_env.yml -f docker-compose-services.yml up -d
 
 # To rebuild all containers run
 
     docker-compose stop && docker-compose rm && docker-compose up -d
 
-# Ground Zero
+# Ground Zero -- Requires groundzero.sh file from github
 
     ./groundzero.sh [SERVICE]
 
@@ -77,7 +79,7 @@ To access postgres
 
 To access the containers
 
-    docker exec -it rmdockerdev_ons-postgres_1 bash
+    docker exec -it case bash
 
 To run a single command
 
