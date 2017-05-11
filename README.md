@@ -9,7 +9,9 @@
 
 # YOU ONLY NEED THE TWO docker-compose-...yml FILES
 
-# in the directory with the docker-compose files run
+# Create a directory called rmdockerdev and place the files in here
+
+# in rmdockerdev run
 
     docker-compose -f docker-compose-dev_env.yml -f docker-compose-services.yml up -d
 
