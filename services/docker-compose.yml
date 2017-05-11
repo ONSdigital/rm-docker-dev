@@ -100,24 +100,24 @@ services:
      - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
      - rabbitmq.host=rmdockerdev_rabbitmq_1
      - redis.host=rmdockerdev_redis_1
-#  collectionexercise:
-#    container_name: collex
-#    image: collexsvc
-#    ports:
-#     - "8145:8145"
-#     - "8245:8245"
-#    external_links:
-#     - rmdockerdev_ons-postgres_1
-#     - rmdockerdev_rabbitmq_1
-#     - rmdockerdev_redis_1
-#    links:
-#     - sample
-#    environment:
-#     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
-#     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
-#     - rabbitmq.host=rmdockerdev_rabbitmq_1
-#     - redis.host=rmdockerdev_redis_1
-#     - sample-svc.connection-config.host=sample
+  collectionexercise:
+    container_name: collex
+    image: collexsvc
+    ports:
+     - "8145:8145"
+     - "8245:8245"
+    external_links:
+     - rmdockerdev_ons-postgres_1
+     - rmdockerdev_rabbitmq_1
+     - rmdockerdev_redis_1
+    links:
+     - sample
+    environment:
+     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
+     - rabbitmq.host=rmdockerdev_rabbitmq_1
+     - redis.host=rmdockerdev_redis_1
+     - sample-svc.connection-config.host=sample
 networks:
   default:
     external:
