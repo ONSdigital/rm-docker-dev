@@ -1,7 +1,7 @@
 version: '2'
 services:
  ons-postgres:
-  build: ./postgres
+  image: sdcplatform/postgres
   ports:
    - "5432:5432"
   volumes:
