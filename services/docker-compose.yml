@@ -1,0 +1,129 @@
+version: "3"
+services:
+  sample:
+    container_name: sample
+    image: samplesvc
+    ports:
+     - "8125:8125"
+     - "8225:8225"
+    external_links:
+     - rmdockerdev_ons-postgres_1 
+     - rmdockerdev_rabbitmq_1
+     - rmdockerdev_redis_1
+     - rmdockerdev_sftp_1
+    environment:
+     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
+     - sftp.host=rmdockerdev_sftp_1
+     - rabbitmq.host=rmdockerdev_rabbitmq_1
+     - redis.host=rmdockerdev_redis_1
+case:
+    container_name: case
+    image: casesvc
+    ports:
+     - "8171:8171"
+     - "8271:8271"
+    external_links:
+     - rmdockerdev_ons-postgres_1
+     - rmdockerdev_rabbitmq_1
+     - rmdockerdev_redis_1
+    links:
+     - action
+     - iac
+    environment:
+     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
+     - rabbitmq.host=rmdockerdev_rabbitmq_1
+     - redis.host=rmdockerdev_redis_1
+     - action-svc.host=action
+     - internet-access-code-svc.host=iac
+action:
+    container_name: action
+    image: actionsvc
+    ports:
+     - "8151:8151"
+     - "8251:8251"
+    external_links:
+     - rmdockerdev_ons-postgres_1
+     - rmdockerdev_rabbitmq_1
+     - rmdockerdev_redis_1
+    links:
+     - case
+    environment:
+     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
+     - rabbitmq.host=rmdockerdev_rabbitmq_1
+     - redis.host=rmdockerdev_redis_1
+     - case-svc.connection-config.host=case
+actionexporter:
+    container_name: actionexporter
+    image: actionexportersvc
+    ports:
+     - "8141:8141"
+     - "8241:8241"
+    external_links:
+     - rmdockerdev_ons-postgres_1
+     - rmdockerdev_rabbitmq_1
+     - rmdockerdev_redis_1
+     - sftp.host=rmdockerdev_sftp_1
+    environment:
+     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
+     - rabbitmq.host=rmdockerdev_rabbitmq_1
+     - redis.host=rmdockerdev_redis_1
+     - sftp.host=rmdockerdev_sftp_1
+iac:
+    container_name: iac
+    image: iacsvc
+    ports:
+     - "8121:8121"
+     - "8221:8221"
+    external_links:
+     - rmdockerdev_ons-postgres_1
+     - rmdockerdev_rabbitmq_1
+     - rmdockerdev_redis_1
+    links:
+     - case
+    environment:
+     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
+     - rabbitmq.host=rmdockerdev_rabbitmq_1
+     - redis.host=rmdockerdev_redis_1
+     - case-svc.connection-config.host=case
+sdx-gateway:
+    container_name: sdx-gateway
+    image: sdx-gateway 
+    ports:
+     - "8191:8191"
+     - "8291:8291"
+    external_links:
+     - rmdockerdev_ons-postgres_1
+     - rmdockerdev_rabbitmq_1
+     - rmdockerdev_redis_1
+    environment:
+     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
+     - rabbitmq.host=rmdockerdev_rabbitmq_1
+     - redis.host=rmdockerdev_redis_1
+collectionexercise:
+    container_name: collex
+    image: collexsvc
+    ports:
+     - "8145:8145"
+     - "8245:8245"
+    external_links:
+     - rmdockerdev_ons-postgres_1
+     - rmdockerdev_rabbitmq_1
+     - rmdockerdev_redis_1
+    links:
+     - sample
+    environment:
+     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
+     - rabbitmq.host=rmdockerdev_rabbitmq_1
+     - redis.host=rmdockerdev_redis_1
+     - sample-svc.connection-config.host=sample
+networks:
+  default:
+    external:
+      name: rmdockerdev_default

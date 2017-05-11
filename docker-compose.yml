@@ -5,7 +5,7 @@ services:
   ports:
    - "5432:5432"
   volumes:
-     - .:/code
+        - /tmp/helpline-mi:/tmp/helpline-mi
  redis:
   image: redis
   ports:
