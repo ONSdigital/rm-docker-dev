@@ -7,7 +7,7 @@ services:
      - "8125:8125"
      - "8225:8225"
     external_links:
-     - rmdockerdev_ons-postgres_1 
+     - rmdockerdev_ons-postgres_1
      - rmdockerdev_rabbitmq_1
      - rmdockerdev_redis_1
      - rmdockerdev_sftp_1
@@ -17,7 +17,7 @@ services:
      - sftp.host=rmdockerdev_sftp_1
      - rabbitmq.host=rmdockerdev_rabbitmq_1
      - redis.host=rmdockerdev_redis_1
-case:
+  case:
     container_name: case
     image: casesvc
     ports:
@@ -27,17 +27,12 @@ case:
      - rmdockerdev_ons-postgres_1
      - rmdockerdev_rabbitmq_1
      - rmdockerdev_redis_1
-    links:
-     - action
-     - iac
     environment:
      - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
      - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
      - rabbitmq.host=rmdockerdev_rabbitmq_1
      - redis.host=rmdockerdev_redis_1
-     - action-svc.host=action
-     - internet-access-code-svc.host=iac
-action:
+  action:
     container_name: action
     image: actionsvc
     ports:
@@ -55,7 +50,7 @@ action:
      - rabbitmq.host=rmdockerdev_rabbitmq_1
      - redis.host=rmdockerdev_redis_1
      - case-svc.connection-config.host=case
-actionexporter:
+  actionexporter:
     container_name: actionexporter
     image: actionexportersvc
     ports:
@@ -72,7 +67,7 @@ actionexporter:
      - rabbitmq.host=rmdockerdev_rabbitmq_1
      - redis.host=rmdockerdev_redis_1
      - sftp.host=rmdockerdev_sftp_1
-iac:
+  iac:
     container_name: iac
     image: iacsvc
     ports:
@@ -90,9 +85,9 @@ iac:
      - rabbitmq.host=rmdockerdev_rabbitmq_1
      - redis.host=rmdockerdev_redis_1
      - case-svc.connection-config.host=case
-sdx-gateway:
+  sdx-gateway:
     container_name: sdx-gateway
-    image: sdx-gateway 
+    image: sdx-gateway
     ports:
      - "8191:8191"
      - "8291:8291"
@@ -105,7 +100,7 @@ sdx-gateway:
      - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
      - rabbitmq.host=rmdockerdev_rabbitmq_1
      - redis.host=rmdockerdev_redis_1
-collectionexercise:
+  collectionexercise:
     container_name: collex
     image: collexsvc
     ports:
