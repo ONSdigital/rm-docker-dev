@@ -16,10 +16,6 @@
     docker-compose -f docker-compose-dev_env.yml up -d              //for dev environment
     docker-compose -f docker-compose-services.yml up -d             //for all services (Requires previous compose first)
 
-# To rebuild all containers run
-
-    docker-compose stop && docker-compose rm && docker-compose up -d
-
 # Ground Zero -- Requires groundzero.sh file from github
 
     ./groundzero.sh [SERVICE]
@@ -34,30 +30,6 @@ Where service can be:
 or blank to delete and remake the whole database.
 
 Alternativley you can run the groundzero.sql scripts in pgAdmin.
-
-# Delete ALL Containers
-
-    docker-compose stop && docker-compose rm
-
-# Delete Specific Container
-
-    docker stop <CONTAINER_NAME>
-    docker rm <CONTAINER_NAME>
-
-# To create a specific container
-
-RabbitMQ
-
-    docker run -d --hostname rabbit --name rmdockerdev_rabbitmq_1 -p 4369:4369 -p 25672:25672 -p 5671-5672:5671-5672 -p 15671-15672:15671-15672 rabbitmq:3.6-management
-
-Postgres
-
-    docker run --name rmdockerdev_ons-postgres_1  -d -p 5432:5432 ons_postgres
-    docker start rmdockerdev_ons-postgres_1
-
-redis
-
-    docker run --name rmdockerdev_redis_1  -d redis
 
 # View running containers
 
@@ -89,3 +61,32 @@ To run a single command
     docker exec rmdockerdev_redis_1 redis-cli del MetaData
 
 will delete the redis MetaDataStore
+
+# To rebuild all containers run
+
+    docker-compose stop && docker-compose rm && docker-compose up -d
+
+
+# Delete ALL Containers
+
+    docker-compose stop && docker-compose rm
+
+# Delete Specific Container
+
+    docker stop <CONTAINER_NAME>
+    docker rm <CONTAINER_NAME>
+
+# To create a specific container
+
+RabbitMQ
+
+    docker run -d --hostname rabbit --name rmdockerdev_rabbitmq_1 -p 4369:4369 -p 25672:25672 -p 5671-5672:5671-5672 -p 15671-15672:15671-15672 rabbitmq:3.6-management
+
+Postgres
+
+    docker run --name rmdockerdev_ons-postgres_1  -d -p 5432:5432 ons_postgres
+    docker start rmdockerdev_ons-postgres_1
+
+redis
+
+    docker run --name rmdockerdev_redis_1  -d redis
