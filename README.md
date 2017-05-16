@@ -13,7 +13,8 @@
 
 # in rmdockerdev run
 
-    docker-compose -f docker-compose-dev_env.yml -f docker-compose-services.yml up -d
+    docker-compose -f docker-compose-dev_env.yml up -d              //for dev environment
+    docker-compose -f docker-compose-services.yml up -d             //for all services (Requires previous compose first)
 
 # To rebuild all containers run
 
@@ -77,7 +78,7 @@ To access the redis-cli:
 
 To access postgres
 
-    docker exec -it rmdockerdev_ons-postgres_1 postgres -U postgres -d postgres
+    docker exec -it rmdockerdev_ons-postgres_1 psql -U postgres -d postgres
 
 To access the containers
 
