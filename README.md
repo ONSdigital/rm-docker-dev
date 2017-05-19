@@ -13,11 +13,8 @@
 
 # in rmdockerdev run
 
-    docker-compose -f docker-compose-dev_env.yml -f docker-compose-services.yml up -d
-
-# To rebuild all containers run
-
-    docker-compose stop && docker-compose rm && docker-compose up -d
+    docker-compose -f docker-compose-dev_env.yml up -d              //for dev environment
+    docker-compose -f docker-compose-services.yml up -d             //for all services (Requires previous compose first)
 
 # Ground Zero -- Requires groundzero.sh file from github
 
@@ -33,6 +30,42 @@ Where service can be:
 or blank to delete and remake the whole database.
 
 Alternativley you can run the groundzero.sql scripts in pgAdmin.
+
+# View running containers
+
+    docker ps
+
+# View All Containers
+
+    docker ps -a
+
+# Access containers
+
+    docker exec -it [CONTAINER_NAME] [COMMAND]
+
+Examples
+To access the redis-cli:
+
+    docker exec -it rmdockerdev_redis_1 redis-cli
+
+To access postgres
+
+    docker exec -it rmdockerdev_ons-postgres_1 psql -U postgres -d postgres
+
+To access the containers
+
+    docker exec -it case bash
+
+To run a single command
+
+    docker exec rmdockerdev_redis_1 redis-cli del MetaData
+
+will delete the redis MetaDataStore
+
+# To rebuild all containers run
+
+    docker-compose stop && docker-compose rm && docker-compose up -d
+
 
 # Delete ALL Containers
 
@@ -57,34 +90,3 @@ Postgres
 redis
 
     docker run --name rmdockerdev_redis_1  -d redis
-
-# View running containers
-
-    docker ps
-
-# View All Containers
-
-    docker ps -a
-
-# Access containers
-
-    docker exec -it [CONTAINER_NAME] [COMMAND]
-
-Examples
-To access the redis-cli:
-
-    docker exec -it rmdockerdev_redis_1 redis-cli
-
-To access postgres
-
-    docker exec -it rmdockerdev_ons-postgres_1 postgres -U postgres -d postgres
-
-To access the containers
-
-    docker exec -it case bash
-
-To run a single command
-
-    docker exec rmdockerdev_redis_1 redis-cli del MetaData
-
-will delete the redis MetaDataStore
