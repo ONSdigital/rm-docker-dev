@@ -7,16 +7,17 @@ services:
      - "8125:8125"
      - "8225:8225"
     external_links:
-     - rmdockerdev_ons-postgres_1
-     - rmdockerdev_rabbitmq_1
-     - rmdockerdev_redis_1
-     - rmdockerdev_sftp_1
+     - postgres
+     - rabbitmq
+     - redis
+     - sftp
     environment:
-     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
-     - sftp.host=rmdockerdev_sftp_1
-     - rabbitmq.host=rmdockerdev_rabbitmq_1
-     - redis.host=rmdockerdev_redis_1
+     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
+     - sftp.host=sftp
+     - rabbitmq.host=rabbitmq
+     - redis.host=redis
+     - data-grid.address=redis:6379
   case:
     container_name: case
     image: sdcplatform/casesvc
@@ -24,14 +25,15 @@ services:
      - "8171:8171"
      - "8271:8271"
     external_links:
-     - rmdockerdev_ons-postgres_1
-     - rmdockerdev_rabbitmq_1
-     - rmdockerdev_redis_1
+     - postgres
+     - rabbitmq
+     - redis
     environment:
-     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
-     - rabbitmq.host=rmdockerdev_rabbitmq_1
-     - redis.host=rmdockerdev_redis_1
+     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
+     - rabbitmq.host=rabbitmq
+     - redis.host=redis
+     - data-grid.address=redis:6379
   action:
     container_name: action
     image: sdcplatform/actionsvc
@@ -39,17 +41,18 @@ services:
      - "8151:8151"
      - "8251:8251"
     external_links:
-     - rmdockerdev_ons-postgres_1
-     - rmdockerdev_rabbitmq_1
-     - rmdockerdev_redis_1
+     - postgres
+     - rabbitmq
+     - redis
     links:
      - case
     environment:
-     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
-     - rabbitmq.host=rmdockerdev_rabbitmq_1
-     - redis.host=rmdockerdev_redis_1
+     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
+     - rabbitmq.host=rabbitmq
+     - redis.host=redis
      - case-svc.connection-config.host=case
+     - data-grid.address=redis:6379
   actionexporter:
     container_name: actionexporter
     image: sdcplatform/actionexportersvc
@@ -57,16 +60,17 @@ services:
      - "8141:8141"
      - "8241:8241"
     external_links:
-     - rmdockerdev_ons-postgres_1
-     - rmdockerdev_rabbitmq_1
-     - rmdockerdev_redis_1
-     - sftp.host=rmdockerdev_sftp_1
+     - postgres
+     - rabbitmq
+     - redis
+     - sftp
     environment:
-     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
-     - rabbitmq.host=rmdockerdev_rabbitmq_1
-     - redis.host=rmdockerdev_redis_1
-     - sftp.host=rmdockerdev_sftp_1
+     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
+     - rabbitmq.host=rabbitmq
+     - redis.host=redis
+     - sftp.host=sftp
+     - data-grid.address=redis:6379
   iac:
     container_name: iac
     image: sdcplatform/iacsvc
@@ -74,16 +78,16 @@ services:
      - "8121:8121"
      - "8221:8221"
     external_links:
-     - rmdockerdev_ons-postgres_1
-     - rmdockerdev_rabbitmq_1
-     - rmdockerdev_redis_1
+     - postgres
+     - rabbitmq
+     - redis
     links:
      - case
     environment:
-     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
-     - rabbitmq.host=rmdockerdev_rabbitmq_1
-     - redis.host=rmdockerdev_redis_1
+     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
+     - rabbitmq.host=rabbitmq
+     - redis.host=redis
      - case-svc.connection-config.host=case
   sdx-gateway:
     container_name: sdx-gateway
@@ -92,14 +96,17 @@ services:
      - "8191:8191"
      - "8291:8291"
     external_links:
-     - rmdockerdev_ons-postgres_1
-     - rmdockerdev_rabbitmq_1
-     - rmdockerdev_redis_1
+     - postgres
+     - rabbitmq
+     - redis
+     - sftp
     environment:
-     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
-     - rabbitmq.host=rmdockerdev_rabbitmq_1
-     - redis.host=rmdockerdev_redis_1
+     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
+     - rabbitmq.host=rabbitmq
+     - redis.host=redis
+     - data-grid.address=redis:6379
+     - sftp.host=sftp
   collectionexercise:
     container_name: collex
     image: sdcplatform/collexsvc
@@ -107,16 +114,16 @@ services:
      - "8145:8145"
      - "8245:8245"
     external_links:
-     - rmdockerdev_ons-postgres_1
-     - rmdockerdev_rabbitmq_1
-     - rmdockerdev_redis_1
+     - postgres
+     - rabbitmq
+     - redis
     links:
      - sample
     environment:
-     - spring.datasource.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://rmdockerdev_ons-postgres_1:5432/postgres
-     - rabbitmq.host=rmdockerdev_rabbitmq_1
-     - redis.host=rmdockerdev_redis_1
+     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
+     - rabbitmq.host=rabbitmq
+     - redis.host=redis
      - sample-svc.connection-config.host=sample
 networks:
   default:

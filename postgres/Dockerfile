@@ -17,3 +17,6 @@ RUN chmod 755 /docker-entrypoint-initdb.d/sample_groundzero.sql
 
 ADD iac_groundzero.sql /docker-entrypoint-initdb.d/iac_groundzero.sql
 RUN chmod 755 /docker-entrypoint-initdb.d/iac_groundzero.sql
+
+ADD collex_groundzero.sql /docker-entrypoint-initdb.d/collex_groundzero.sql
+RUN chmod 755 /docker-entrypoint-initdb.d/collex_groundzero.sql
