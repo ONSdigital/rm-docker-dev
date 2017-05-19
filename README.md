@@ -27,6 +27,7 @@ Where service can be:
     - actionexp
     - iac
     - sample
+    - collex
 or blank to delete and remake the whole database.
 
 Alternativley you can run the groundzero.sql scripts in pgAdmin.
@@ -46,11 +47,11 @@ Alternativley you can run the groundzero.sql scripts in pgAdmin.
 Examples
 To access the redis-cli:
 
-    docker exec -it rmdockerdev_redis_1 redis-cli
+    docker exec -it redis redis-cli
 
 To access postgres
 
-    docker exec -it rmdockerdev_ons-postgres_1 psql -U postgres -d postgres
+    docker exec -it postgres psql -U postgres -d postgres
 
 To access the containers
 
@@ -58,7 +59,7 @@ To access the containers
 
 To run a single command
 
-    docker exec rmdockerdev_redis_1 redis-cli del MetaData
+    docker exec redis redis-cli del MetaData
 
 will delete the redis MetaDataStore
 
@@ -80,13 +81,13 @@ will delete the redis MetaDataStore
 
 RabbitMQ
 
-    docker run -d --hostname rabbit --name rmdockerdev_rabbitmq_1 -p 4369:4369 -p 25672:25672 -p 5671-5672:5671-5672 -p 15671-15672:15671-15672 rabbitmq:3.6-management
+    docker run -d --hostname rabbit --name rabbitmq -p 4369:4369 -p 25672:25672 -p 5671-5672:5671-5672 -p 15671-15672:15671-15672 rabbitmq:3.6-management
 
 Postgres
 
-    docker run --name rmdockerdev_ons-postgres_1  -d -p 5432:5432 ons_postgres
-    docker start rmdockerdev_ons-postgres_1
+    docker run --name postgres  -d -p 5432:5432 ons_postgres
+    docker start postgres
 
 redis
 
-    docker run --name rmdockerdev_redis_1  -d redis
+    docker run --name redis  -d redis
