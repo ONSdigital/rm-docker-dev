@@ -34,6 +34,8 @@ services:
      - rabbitmq.host=rabbitmq
      - redis.host=redis
      - data-grid.address=redis:6379
+     - action-svc.connection-config.host=action
+     - internet-access-code-svc.connection-config.host=iac
   action:
     container_name: action
     image: sdcplatform/actionsvc
@@ -44,8 +46,6 @@ services:
      - postgres
      - rabbitmq
      - redis
-    links:
-     - case
     environment:
      - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
      - liquibase.url=jdbc:postgresql://postgres:5432/postgres
@@ -81,8 +81,6 @@ services:
      - postgres
      - rabbitmq
      - redis
-    links:
-     - case
     environment:
      - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
      - liquibase.url=jdbc:postgresql://postgres:5432/postgres
@@ -117,8 +115,6 @@ services:
      - postgres
      - rabbitmq
      - redis
-    links:
-     - sample
     environment:
      - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
      - liquibase.url=jdbc:postgresql://postgres:5432/postgres
