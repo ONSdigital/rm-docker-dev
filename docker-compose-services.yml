@@ -107,7 +107,7 @@ services:
      - sftp.host=sftp
   collectionexercise:
     container_name: collex
-    image: sdcplatform/collexsvc
+    image: sdcplatform/collectionexercisesvc 
     ports:
      - "8145:8145"
      - "8245:8245"
@@ -119,8 +119,18 @@ services:
      - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
      - liquibase.url=jdbc:postgresql://postgres:5432/postgres
      - rabbitmq.host=rabbitmq
-     - redis.host=redis
+     - redisson-config.address=redis:6379
+     - data-grid.address=redis:6379
      - sample-svc.connection-config.host=sample
+  survey:
+    container_name: survey
+    image: sdcplatform/surveysvc
+    ports:
+     - "8080:8080"
+    external_links:
+     - postgres
+    environment:
+     - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
 networks:
   default:
     external:
