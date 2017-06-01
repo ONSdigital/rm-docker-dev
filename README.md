@@ -64,14 +64,21 @@ To run a single command
 
 will delete the redis MetaDataStore
 
-# To rebuild all containers run
+# To start all stopped containers
 
-    docker-compose stop && docker-compose rm && docker-compose up -d
+   docker start $(docker ps -a -q)
 
+# To stop all containers
+
+   docker stop $(docker ps -q)
+
+# To Delete All images (when no containers exist)
+
+   docker rmi $(docker images -q)
 
 # Delete ALL Containers
 
-    docker-compose stop && docker-compose rm
+   docker rm $(docker ps -a -q)
 
 # Delete Specific Container
 

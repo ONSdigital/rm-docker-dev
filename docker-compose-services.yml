@@ -131,6 +131,7 @@ services:
      - postgres
     environment:
      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+     - PG_DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
 networks:
   default:
     external:
