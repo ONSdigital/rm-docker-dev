@@ -3,7 +3,7 @@
 if [ $# -eq 0 ]; then
   docker stop postgres
   docker rm postgres
-  docker-compose up -d
+  docker run --name postgres -d -p 5432:5432 --network rmdockerdev_default sdcplatform/postgres
   docker ps
 elif [ "$1" == "case" ]; then
   docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/case_groundzero.sql
