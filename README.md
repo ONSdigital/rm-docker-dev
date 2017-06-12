@@ -13,8 +13,9 @@
 
 # in rmdockerdev run
     
-    docker-compose -f docker-compose-dev_env.yml -f docker-compose-services.yml pull
+    docker-compose -f docker-compose-dev_env.yml pull 
     docker-compose -f docker-compose-dev_env.yml up -d              //for dev environment
+    docker-compose -f docker-compose-services.yml pull
     docker-compose -f docker-compose-services.yml up -d             //for all services (Requires previous compose first)
 
 # Ground Zero -- Requires groundzero.sh file from github
