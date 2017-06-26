@@ -36,6 +36,7 @@ services:
      - data-grid.address=redis:6379
      - action-svc.connection-config.host=action
      - internet-access-code-svc.connection-config.host=iac
+     - collection-exercise-svc.connection-config.host=collex
   action:
     container_name: action
     image: sdcplatform/actionsvc
@@ -52,6 +53,7 @@ services:
      - rabbitmq.host=rabbitmq
      - redis.host=redis
      - case-svc.connection-config.host=case
+     - collection-exercise-svc.connection-config.host=collex
      - data-grid.address=redis:6379
   actionexporter:
     container_name: actionexporter
@@ -122,6 +124,7 @@ services:
      - redisson-config.address=redis:6379
      - data-grid.address=redis:6379
      - sample-svc.connection-config.host=sample
+     - survey-svc.connection-config.host=survey
   survey:
     container_name: survey
     image: sdcplatform/surveysvc
@@ -132,16 +135,6 @@ services:
     environment:
      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
      - PG_DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
-  party:
-    container_name: party
-    image: sdcplatform/party-service-mock
-    ports:
-     - "8081:8080"
-  collectioninstrument:
-    container_name: collection_inst
-    image: sdcplatform/collection-instrument-mock
-    ports:
-     - "8082:8080"
 networks:
   default:
     external:
