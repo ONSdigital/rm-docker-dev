@@ -18,6 +18,7 @@ services:
      - rabbitmq.host=rabbitmq
      - redis.host=redis
      - data-grid.address=redis:6379
+     - party-svc.connection-config.host=ras-party-service-int.apps.devtest.onsclofo.uk
   case:
     container_name: case
     image: sdcplatform/casesvc
@@ -125,6 +126,7 @@ services:
      - data-grid.address=redis:6379
      - sample-svc.connection-config.host=sample
      - survey-svc.connection-config.host=survey
+     - party-svc.connection-config.host=ras-party-service-int.apps.devtest.onsclofo.uk
   survey:
     container_name: survey
     image: sdcplatform/surveysvc
