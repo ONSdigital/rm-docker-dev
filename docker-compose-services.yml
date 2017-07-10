@@ -1,4 +1,4 @@
-version: "2"
+version: '2'
 services:
   sample:
     container_name: sample
@@ -76,7 +76,7 @@ services:
      - data-grid.address=redis:6379
   iac:
     container_name: iac
-    image: sdcplatform/iacsvc
+    image: sdcplatform/iacsvc 
     ports:
      - "8121:8121"
      - "8221:8221"
