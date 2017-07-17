@@ -7,12 +7,12 @@ services:
    - "5434:5432"
  redis:
   container_name: redis
-  image: redis
+  image: redis:3.2.9
   ports:
    - "6379:6379"
  rabbitmq:
   container_name: rabbitmq
-  image: rabbitmq:3-management
+  image: rabbitmq:3.6.10-management
   ports:
     - "4370:4369"
     - "25675:25672"
