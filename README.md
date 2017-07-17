@@ -100,3 +100,18 @@ Postgres
 redis
 
     docker run --name redis  -d redis
+
+# Port Mappings
+
+The port mapping between services and their containers are contained within the docker yaml files. Services have been tested against a vanilla developer
+machine - so there should be no clashes between ports being used on a dev machine and your docker containers. A confluence page has been setup showing
+the mappings, please update this if there needs to be changes to any of the yaml file. Changes should be [done here](https://digitaleq.atlassian.net/wiki/display/RASB/Developer+Environment+Port+Mappings)
+
+
+
+
+
+
+
+
+
