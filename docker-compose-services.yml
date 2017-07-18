@@ -17,6 +17,7 @@ services:
      - rabbitmq.port=5672
      - rabbitmq.host=rabbitmq
      - redis.host=redis
+     - redis.port=6379
      - data-grid.address=redis:6379
      - sftp.host=sftp
      - sftp.port=22
