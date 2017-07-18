@@ -4,25 +4,25 @@ services:
   container_name: postgres
   image: sdcplatform/postgres
   ports:
-   - "5432:5432"
+   - "6432:5432"
  redis:
   container_name: redis
   image: redis:3.2.9
   ports:
-   - "6379:6379"
+   - "7379:6379"
  rabbitmq:
   container_name: rabbitmq
   image: rabbitmq:3.6.10-management
   ports:
-    - "4369:4369"
-    - "25672:25672"
-    - "5671-5672:5671-5672"
-    - "15671-15672:15671-15672"
+    - "5369:4369"
+    - "45672:25672"
+    - "6671-6672:5671-5672"
+    - "16671-16672:15671-15672"
  sftp:
     container_name: sftp
     image: atmoz/sftp
     volumes:
         - ~/Documents/sftp:/home/centos/Documents/sftp
     ports:
-        - "22:22"
+        - "122:22"
     command: centos:JLibV2&XD,:1001
