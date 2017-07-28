@@ -5,18 +5,25 @@ if [ $# -eq 0 ]; then
   docker rm postgres
   docker run --name postgres -d -p 6432:5432 --network rmdockerdev_default sdcplatform/postgres
   docker ps
-elif [ "$1" == "case" ]; then
-  docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/case_groundzero.sql
-elif [ "$1" = "action" ]; then
-  docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/action_groundzero.sql
-elif [ "$1" = "actionexp" ]; then
-  docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/actionexp_groundzero.sql
-elif [ "$1" = "iac" ]; then
-  docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/iac_groundzero.sql
-elif [ "$1" = "sample" ]; then
-  docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/sample_groundzero.sql
-elif [ "$1" = "collex" ]; then
-  docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/collex_groundzero.sql
 else
-  echo "Invalid argument."
+  for arg in "$@"
+  do
+    if [ "$arg" == "case" ]; then
+      docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/case_groundzero.sql
+    elif [ "$arg" = "action" ]; then
+      docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/action_groundzero.sql
+    elif [ "$arg" = "actionexp" ]; then
+      docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/actionexp_groundzero.sql
+    elif [ "$arg" = "iac" ]; then
+      docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/iac_groundzero.sql
+    elif [ "$arg" = "sample" ]; then
+      docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/sample_groundzero.sql
+    elif [ "$arg" = "collex" ]; then
+      docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/collex_groundzero.sql
+    elif [ "$arg" = "notify" ]; then
+      docker exec postgres psql -U postgres -f /docker-entrypoint-initdb.d/notify_groundzero.sql
+    else
+      echo "Invalid argument."
+    fi
+  done
 fi

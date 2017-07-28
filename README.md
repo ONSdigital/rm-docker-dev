@@ -2,27 +2,31 @@
 
     https://docs.docker.com/docker-for-mac/install/
 
-
 # login to docker
 
     docker login
-
-# YOU ONLY NEED THE TWO docker-compose-...yml FILES
-
-# Create a directory called rmdockerdev and place the files in here
 
 # in rmdockerdev run
     
     docker-compose -f docker-compose-dev_env.yml pull 
     docker-compose -f docker-compose-dev_env.yml up -d              //for dev environment
+
     docker-compose -f docker-compose-services.yml pull
     docker-compose -f docker-compose-services.yml up -d             //for all services (Requires previous compose first)
 
+    docker-compose -f docker-compose-services.yml up -d [SERVICE]   //for only specific containers rather than all of them
+
+# Changing variables
+
+    You can change the host and port values of services in the .env file
+
+    Host must be either a container name, your IP or the service cloudfoundry path
+    
 # Ground Zero -- Requires groundzero.sh file from github
 
-    ./groundzero.sh [SERVICE]
+    ./groundzero.sh [SERVICE] [SERVICE] ...
 
-Where service can be:
+Where service can be any number of:
 
     - case
     - action
@@ -30,6 +34,7 @@ Where service can be:
     - iac
     - sample
     - collex
+
 or blank to delete and remake the whole database.
 
 Alternativley you can run the groundzero.sql scripts in pgAdmin.
@@ -73,6 +78,10 @@ will delete the redis MetaDataStore
 
    docker stop $(docker ps -q)
 
+   OR
+
+   docker-compose -f docker-compose-services.yml down
+
 # To Delete All images (when no containers exist)
 
    docker rmi $(docker images -q)
@@ -86,17 +95,3 @@ will delete the redis MetaDataStore
     docker stop <CONTAINER_NAME>
     docker rm <CONTAINER_NAME>
 
-# To create a specific container
-
-RabbitMQ
-
-    docker run -d --hostname rabbit --name rabbitmq -p 4369:4369 -p 25672:25672 -p 5671-5672:5671-5672 -p 15671-15672:15671-15672 rabbitmq:3.6-management
-
-Postgres
-
-    docker run --name postgres  -d -p 5432:5432 ons_postgres
-    docker start postgres
-
-redis
-
-    docker run --name redis  -d redis

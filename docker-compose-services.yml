@@ -4,101 +4,103 @@ services:
     container_name: sample
     image: sdcplatform/samplesvc
     ports:
-     - "2125:8125"
-     - "8225:8225"
+     - "${SAMPLE_PORT}:8125"
+     - "${SAMPLE_MAN_PORT}:8225"
     external_links:
      - postgres
      - rabbitmq
      - redis
      - sftp
+     - party
     environment:
-     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
-     - rabbitmq.port=5672
-     - rabbitmq.host=rabbitmq
-     - redis.host=redis
-     - redis.port=6379
-     - data-grid.address=redis:6379
-     - sftp.host=sftp
-     - sftp.port=22
-     - party-svc.connection-config.host=ras-party-service-int.apps.devtest.onsclofo.uk
+     - spring.datasource.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}
+     - rabbitmq.port=${RABBIT_PORT}
+     - rabbitmq.host=${RABBIT_HOST}
+     - redis.host=${REDIS_HOST}
+     - redis.port=${REDIS_PORT}
+     - data-grid.address=${REDIS_HOST}:${REDIS_PORT}
+     - sftp.host=${SFTP_HOST}
+     - sftp.port=${SFTP_PORT}
+     - party-svc.connection-config.host=party
+     - party-svc.connection-config.port=5062
   case:
-    container_name: case
+    container_name: casesvc
     image: sdcplatform/casesvc
     ports:
-     - "8171:8171"
-     - "8271:8271"
+     - "${CASE_PORT}:8171"
+     - "${CASE_MAN_PORT}:8271"
     external_links:
      - postgres
      - rabbitmq
      - redis
     environment:
-     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
-     - rabbitmq.host=rabbitmq
-     - rabbitmq.port=5672
-     - redis.host=redis
-     - data-grid.address=redis:6379
-     - action-svc.connection-config.host=action
-     - internet-access-code-svc.connection-config.host=iac
-     - collection-exercise-svc.connection-config.host=collex
+     - spring.datasource.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}
+     - rabbitmq.host=${RABBIT_HOST}
+     - rabbitmq.port=${RABBIT_PORT}
+     - redis.host=${REDIS_HOST}
+     - data-grid.address=${REDIS_HOST}:${REDIS_PORT}
+     - action-svc.connection-config.host=${ACTION_HOST}
+     - internet-access-code-svc.connection-config.host=${IAC_HOST}
+     - collection-exercise-svc.connection-config.host=${COLLEX_HOST}
      - case-distribution.delay-milli-seconds=30000
   action:
     container_name: action
     image: sdcplatform/actionsvc
     ports:
-     - "8151:8151"
-     - "8251:8251"
+     - "${ACTION_PORT}:8151"
+     - "${ACTION_MAN_PORT}:8251"
     external_links:
      - postgres
      - rabbitmq
      - redis
     environment:
-     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
-     - rabbitmq.host=rabbitmq
-     - rabbitmq.port=5672
-     - redis.host=redis
-     - case-svc.connection-config.host=case
-     - collection-exercise-svc.connection-config.host=collex
-     - data-grid.address=redis:6379
+     - spring.datasource.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}
+     - rabbitmq.host=${RABBIT_HOST}
+     - rabbitmq.port=${RABBIT_PORT}
+     - redis.host=${REDIS_HOST}
+     - case-svc.connection-config.host=${CASE_HOST}
+     - collection-exercise-svc.connection-config.host=${COLLEX_HOST}
+     - data-grid.address=${REDIS_HOST}:${REDIS_PORT}
   actionexporter:
     container_name: actionexporter
     image: sdcplatform/actionexportersvc
     ports:
-     - "8141:8141"
-     - "8241:8241"
+     - "${ACTIONEXP_PORT}:8141"
+     - "${ACTIONEXP_MAN_PORT}:8241"
     external_links:
      - postgres
      - rabbitmq
      - redis
      - sftp
     environment:
-     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
-     - rabbitmq.host=rabbitmq
-     - rabbitmq.port=5672
-     - redis.host=redis
-     - sftp.host=sftp
-     - sftp.port=22
-     - data-grid.address=redis:6379
+     - spring.datasource.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}
+     - rabbitmq.host=${RABBIT_HOST}
+     - rabbitmq.port=${RABBIT_PORT}
+     - redis.host=${REDIS_HOST}
+     - sftp.host=${SFTP_HOST}
+     - sftp.port=${SFTP_PORT}
+     - data-grid.address=${REDIS_HOST}:${REDIS_PORT}
   iac:
     container_name: iac
     image: sdcplatform/iacsvc 
     ports:
-     - "8121:8121"
-     - "8221:8221"
+     - "${IAC_PORT}:8121"
+     - "${IAC_MAN_PORT}:8221"
     external_links:
      - postgres
      - rabbitmq
      - redis
     environment:
-     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
-     - rabbitmq.host=rabbitmq
-     - rabbitmq.port=5672
-     - redis.host=redis
-     - case-svc.connection-config.host=case
+     - spring.datasource.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}
+     - rabbitmq.host=${RABBIT_HOST}
+     - rabbitmq.port=${RABBIT_PORT}
+     - redis.host=${REDIS_HOST}
+     - case-svc.connection-config.host=${CASE_HOST}
   sdx-gateway:
     container_name: sdx-gateway
     image: sdcplatform/sdx-gateway
@@ -111,43 +113,46 @@ services:
      - redis
      - sftp
     environment:
-     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
-     - rabbitmq.host=rabbitmq
-     - rabbitmq.port=5672
-     - redis.host=redis
-     - data-grid.address=redis:6379
-     - sftp.host=sftp
-     - sftp.port=22
+     - spring.datasource.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}
+     - rabbitmq.host=${RABBIT_HOST}
+     - rabbitmq.port=${RABBIT_PORT}
+     - redis.host=${REDIS_HOST}
+     - data-grid.address=${REDIS_HOST}:${REDIS_PORT}
+     - sftp.host=${SFTP_HOST}
+     - sftp.port=${SFTP_PORT}
   collectionexercise:
     container_name: collex
     image: sdcplatform/collectionexercisesvc 
     ports:
-     - "8145:8145"
-     - "8245:8245"
+     - "${COLLEX_PORT}:8145"
+     - "${COLLEX_MAN_PORT}:8245"
     external_links:
      - postgres
      - rabbitmq
      - redis
     environment:
-     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
-     - rabbitmq.host=rabbitmq
-     - rabbitmq.port=5672
-     - redisson-config.address=redis:6379
-     - data-grid.address=redis:6379
-     - sample-svc.connection-config.host=sample
-     - survey-svc.connection-config.host=survey
-     - party-svc.connection-config.host=ras-party-service-int.apps.devtest.onsclofo.uk
+     - spring.datasource.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}?sslmode=disable
+     - liquibase.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}
+     - rabbitmq.host=${RABBIT_HOST}
+     - rabbitmq.port=${RABBIT_PORT}
+     - redisson-config.address=${REDIS_HOST}:${REDIS_PORT}
+     - data-grid.address=${REDIS_HOST}:${REDIS_PORT}
+     - sample-svc.connection-config.host=${SAMPLE_HOST}
+     - survey-svc.connection-config.host=${SURVEY_HOST}
+     - party-svc.connection-config.host=${PARTY_HOST}
+     - party-svc.connection-config.port=${PARTY_PORT}
+     - collection-instrument-svc.connection-config.host=${COLL_INST_HOST}
+     - collection-instrument-svc.connection-config.port=${COLL_INST_PORT}
   survey:
     container_name: survey
-    image: sdcplatform/surveysvc
+    image: sdcplatform/surveysvc:10.43.2
     ports:
-     - "8080:8080"
+     - "${SURVEY_PORT}:8080"
     external_links:
      - postgres
     environment:
-     - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+     - DATABASE_URL=postgres://postgres:postgres@${POSTGRES_HOST}:${POSTGRES_PORT}/postgres?sslmode=disable
   notifygateway:
     container_name: notifygateway
     image: sdcplatform/notifygatewaysvc
@@ -155,10 +160,13 @@ services:
      - "8281:8281"
     external_links:
      - rabbitmq
+     - postgres
     environment:
-     - rabbitmq.host=rabbitmq
-     - rabbitmq.port=5672
+     - rabbitmq.host=${RABBIT_HOST}
+     - rabbitmq.port=${RABBIT_PORT}
      - notify.apiKey=ctpnotifygateway-0e515090-7962-40e8-a8c7-acbacf079c21-ac979394-a989-4f79-b0e0-6abcca564393
+     - spring.datasource.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}
+     - liquibase.url=jdbc:postgresql://postgres:${POSTGRES_PORT}/${POSTGRES_HOST}
 networks:
   default:
     external:
