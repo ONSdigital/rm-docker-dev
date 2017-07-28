@@ -18,7 +18,7 @@
 
 # Changing variables
 
-    You can change the host and port values of services in the .env file
+You can change the host and port values of services in the .env file
 
     Host must be either a container name, your IP or the service cloudfoundry path
     
@@ -72,23 +72,23 @@ will delete the redis MetaDataStore
 
 # To start all stopped containers
 
-   docker start $(docker ps -a -q)
+    docker start $(docker ps -a -q)
 
 # To stop all containers
 
-   docker stop $(docker ps -q)
+    docker stop $(docker ps -q)
 
-   OR
+OR
 
-   docker-compose -f docker-compose-services.yml down
+    docker-compose -f docker-compose-services.yml down
 
 # To Delete All images (when no containers exist)
 
-   docker rmi $(docker images -q)
+    docker rmi $(docker images -q)
 
 # Delete ALL Containers
 
-   docker rm $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
 
 # Delete Specific Container
 
