@@ -38,42 +38,42 @@ services:
      - action-svc.connection-config.host=action
      - internet-access-code-svc.connection-config.host=iac
      - collection-exercise-svc.connection-config.host=collex
-  action:
-    container_name: action
-    image: sdcplatform/actionsvc
-    ports:
-     - "8151:8151"
-     - "8251:8251"
-    external_links:
-     - postgres
-     - rabbitmq
-     - redis
-    environment:
-     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
-     - rabbitmq.host=rabbitmq
-     - redis.host=redis
-     - case-svc.connection-config.host=case
-     - collection-exercise-svc.connection-config.host=collex
-     - data-grid.address=redis:6379
-  actionexporter:
-    container_name: actionexporter
-    image: sdcplatform/actionexportersvc
-    ports:
-     - "8141:8141"
-     - "8241:8241"
-    external_links:
-     - postgres
-     - rabbitmq
-     - redis
-     - sftp
-    environment:
-     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
-     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
-     - rabbitmq.host=rabbitmq
-     - redis.host=redis
-     - sftp.host=sftp
-     - data-grid.address=redis:6379
+#  action:
+#    container_name: action
+#    image: sdcplatform/actionsvc
+#    ports:
+#     - "8151:8151"
+#     - "8251:8251"
+#    external_links:
+#     - postgres
+#     - rabbitmq
+#     - redis
+#    environment:
+#     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
+#     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
+#     - rabbitmq.host=rabbitmq
+#     - redis.host=redis
+#     - case-svc.connection-config.host=case
+#     - collection-exercise-svc.connection-config.host=collex
+#     - data-grid.address=redis:6379
+#  actionexporter:
+#    container_name: actionexporter
+#    image: sdcplatform/actionexportersvc
+#    ports:
+#     - "8141:8141"
+#     - "8241:8241"
+#    external_links:
+#     - postgres
+#     - rabbitmq
+#     - redis
+#     - sftp
+#    environment:
+#     - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres?sslmode=disable
+#     - liquibase.url=jdbc:postgresql://postgres:5432/postgres
+#     - rabbitmq.host=rabbitmq
+#     - redis.host=redis
+#     - sftp.host=sftp
+#     - data-grid.address=redis:6379
   iac:
     container_name: iac
     image: sdcplatform/iacsvc
@@ -131,7 +131,7 @@ services:
     container_name: survey
     image: sdcplatform/surveysvc
     ports:
-     - "8080:8080"
+     - "8081:8081"
     external_links:
      - postgres
     environment:
