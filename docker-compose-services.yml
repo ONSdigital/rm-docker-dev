@@ -154,7 +154,7 @@ services:
      - collection-instrument-svc.connection-config.port=${COLL_INST_PORT}
   survey:
     container_name: survey
-    image: sdcplatform/surveysvc:10.43.2
+    image: sdcplatform/surveysvc
     ports:
      - "${SURVEY_PORT}:8080"
     external_links:

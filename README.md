@@ -14,6 +14,11 @@
     docker-compose -f docker-compose-services.yml pull
     docker-compose -f docker-compose-services.yml up -d             //for all services (Requires previous compose first)
 
+    docker-compose -f docker-compose-ras.yml pull 
+    docker-compose -f docker-compose-ras.yml up -d	            //for RAS party and collection-instrument services (Without test data)
+
+    ./ras-compose.sh					            //creates party & collection-instrument containers and populates database with test data
+
     docker-compose -f docker-compose-services.yml up -d [SERVICE]   //for only specific containers rather than all of them
 
 # Changing variables
