@@ -161,6 +161,8 @@ services:
      - postgres
     environment:
      - DATABASE_URL=postgres://postgres:postgres@${POSTGRES_HOST}:${POSTGRES_PORT}/postgres?sslmode=disable
+     - security_user_name=admin
+     - security_user_password=secret
   notifygateway:
     container_name: notifygateway
     image: sdcplatform/notifygatewaysvc
