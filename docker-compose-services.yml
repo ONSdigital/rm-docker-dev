@@ -24,6 +24,8 @@ services:
      - sftp.port=${SFTP_PORT}
      - party-svc.connection-config.host=${PARTY_HOST}
      - party-svc.connection-config.port=${PARTY_PORT}
+     - party-svc.connection-config.username=${PARTY_USER}
+     - party-svc.connection-config.password=${PARTY_PASSWORD}
   case:
     container_name: casesvc
     image: sdcplatform/casesvc
@@ -150,8 +152,12 @@ services:
      - survey-svc.connection-config.port=${SURVEY_PORT}
      - party-svc.connection-config.host=${PARTY_HOST}
      - party-svc.connection-config.port=${PARTY_PORT}
+     - party-svc.connection-config.username=${PARTY_USER}
+     - party-svc.connection-config.password=${PARTY_PASSWORD}
      - collection-instrument-svc.connection-config.host=${COLL_INST_HOST}
      - collection-instrument-svc.connection-config.port=${COLL_INST_PORT}
+     - collection-instrument-svc.connection-config.username=${COLL_INST_USER}
+     - collection-instrument-svc.connection-config.password=${COLL_INST_PASSWORD}
   survey:
     container_name: survey
     image: sdcplatform/surveysvc
@@ -161,8 +167,8 @@ services:
      - postgres
     environment:
      - DATABASE_URL=postgres://postgres:postgres@${POSTGRES_HOST}:${POSTGRES_PORT}/postgres?sslmode=disable
-     - security_user_name=admin
-     - security_user_password=secret
+     - security_user_name=${SURVEY_USER}
+     - security_user_password=${SURVEY_PASSWORD}
   notifygateway:
     container_name: notifygateway
     image: sdcplatform/notifygatewaysvc
