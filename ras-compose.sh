@@ -17,7 +17,7 @@ docker-compose -f docker-compose-ras.yml up -d
 }
 
 usage() {
-echo "Script to run up required containers for RAS, use flags:- clean: pull containers and run, up rebuild and restart all containers"
+echo "Script to run up required containers for RAS, use flags:- clean: pull containers and run, up rebuild and restart all containers, down: stop all running containers"
 }
 
 populate() {
@@ -26,15 +26,18 @@ docker exec postgres psql -U postgres -d postgres -f collection_instrument_test_
 }
 case "$1" in
  up) 
-    down
-    up
-    populate
-    ;;
+   down
+   up
+   populate
+   ;;
  clean)
    down 
    pull
    up
    populate
+   ;;
+ down)
+   down
    ;;
  *)
    usage
