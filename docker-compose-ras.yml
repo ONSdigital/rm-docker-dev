@@ -13,8 +13,8 @@ services:
      - iac-service.host=${IAC_HOST}
      - ras-party-db.schema=partysvc
      - ras-party-db.uri=postgresql://postgres@postgres:5432/postgres
-     - service.SECURITY_USER_NAME=${PARTY_USER}
-     - service.SECURITY_USER_PASSWORD=${PARTY_PASSWORD}
+     - SECURITY_USER_NAME=${PARTY_USER}
+     - SECURITY_USER_PASSWORD=${PARTY_PASSWORD}
     command:
      - docker exec postgres psql -U postgres -d postgres -f party_test_data.sql
   collection_instrument:

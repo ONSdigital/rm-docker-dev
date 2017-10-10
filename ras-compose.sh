@@ -21,7 +21,7 @@ echo "Script to run up required containers for RAS, use flags:- clean: pull cont
 }
 
 populate() {
-sleep 10
+sleep 20
 docker exec postgres psql -U postgres -d postgres -f collection_instrument_test_data.sql
 }
 case "$1" in
