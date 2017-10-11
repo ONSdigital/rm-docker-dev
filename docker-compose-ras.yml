@@ -19,7 +19,7 @@ services:
     container_name: collection_instrument
     image: sdcplatform/collection_instrument
     ports:
-     - "8081:8080"
+     - "8080:8080"
     environment:
      - db_name=postgres
      - db_host=postgres
