@@ -18,23 +18,41 @@ up() {
  docker-compose -f docker-compose-ras.yml up -d
  docker-compose -f docker-compose-services.yml up -d
 }
+copy_data() {
+  docker cp test_data postgres:/test_data
+}
+
+install_data() {
+  docker exec postgres psql -U postgres -d postgres -f test_data/case_test_data.sql
+}
+
+populate(){
+  copy_data
+  sleep 15
+  install_data
+}
 
 usage() {
-echo "Script to run up RM CONTAINERS, use flags:- clean: pull containers and run, up rebuild and restart all containers, down: stop all running containers"
+echo "Script to run up RM CONTAINERS, use flags:- clean: pull containers and run, up rebuild and restart all containers, down: stop all running containers, populate: populate database with test data"
 }
 
 case "$1" in
- up) 
+ up)
    down
    up
+   populate
    ;;
  clean)
-   down 
+   down
    pull
    up
+   populate
    ;;
  down)
    down
+   ;;
+ populate)
+   install_data
    ;;
  *)
    usage
