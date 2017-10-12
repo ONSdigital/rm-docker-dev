@@ -18,18 +18,13 @@ up() {
  docker-compose -f docker-compose-ras.yml up -d
  docker-compose -f docker-compose-services.yml up -d
 }
+
 copy_data() {
   docker cp test_data postgres:/test_data
 }
 
 install_data() {
   docker exec postgres psql -U postgres -d postgres -f test_data/case_test_data.sql
-}
-
-populate(){
-  copy_data
-  sleep 15
-  install_data
 }
 
 usage() {
@@ -40,13 +35,13 @@ case "$1" in
  up)
    down
    up
-   populate
+   copy_data
    ;;
  clean)
    down
    pull
    up
-   populate
+   copy_data
    ;;
  down)
    down
