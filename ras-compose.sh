@@ -20,11 +20,11 @@ up() {
 }
 
 copy_data() {
-  docker cp test_data postgres:/test_data
+  docker cp install_test_data.sql postgres:/install_test_data.sql
 }
 
 install_data() {
-  docker exec postgres psql -U postgres -d postgres -f test_data/case_test_data.sql
+  docker exec postgres psql -U postgres -d postgres -f install_test_data.sql
 }
 
 usage() {
