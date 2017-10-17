@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # stop all running containers
 down() {
