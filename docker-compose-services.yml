@@ -71,6 +71,12 @@ services:
      - collection-exercise-svc.connection-config.host=${COLLEX_HOST}
      - collection-exercise-svc.connection-config.port=${COLLEX_PORT}
      - data-grid.address=${REDIS_HOST}:${REDIS_PORT}
+     - party-svc.connection-config.host=${PARTY_HOST}
+     - party-svc.connection-config.port=${PARTY_PORT}
+     - party-svc.connection-config.username=${PARTY_USER}
+     - party-svc.connection-config.password=${PARTY_PASSWORD}
+     - survey-svc.connection-config.host=${SURVEY_HOST}
+     - survey-svc.connection-config.port=${SURVEY_PORT}
   actionexporter:
     container_name: actionexporter
     image: sdcplatform/actionexportersvc
