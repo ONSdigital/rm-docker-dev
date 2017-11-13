@@ -26,3 +26,10 @@ services:
     ports:
         - "${EX_SFTP_PORT}:22"
     command: centos:JLibV2&XD,:1001
+ cfdatabasetool:
+  container_name: cfdatabasetool
+  image: sdcplatform/cfdatabasetool
+  environment:
+   - spring.datasource.url=jdbc:postgresql://postgres:5432/postgres
+  ports:
+   - "9000:9000"
