@@ -102,3 +102,15 @@ OR
     docker stop <CONTAINER_NAME>
     docker rm <CONTAINER_NAME>
 
+# Debug ports for Java services
+
+| Service name        | Port |
+|---------------------|------|
+| Case                | 5171 |
+| Action              | 5151 |
+| Sample              | 5125 |
+| Collection Exercise | 5145 |
+| IAC                 | 5121 |
+| Action Exporter     | 5141 |
+| SDX Gateway         | 5191 |
+| Notify Gateway      | 5281 |
