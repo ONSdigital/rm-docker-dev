@@ -1,4 +1,4 @@
-FROM jenkinsci/jenkins:2.73.2
+FROM jenkinsci/jenkins:2.95
 USER root
 RUN apt-get update
 RUN apt-get install -y build-essential
