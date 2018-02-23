@@ -34,9 +34,5 @@ RUN apk add --update curl bash \
   && rm -rf /var/cache/apk/* \
   && curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest > /usr/bin/docker \
   && chmod +x /usr/bin/docker
-ADD https://download.docker.com/linux/static/stable/x86_64/docker-17.12.0-ce.tgz .
-RUN tar -xzf docker-17.12.0-ce.tgz
-RUN cp docker/docker /usr/bin/
-
 
 USER jenkins
